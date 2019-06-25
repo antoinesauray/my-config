@@ -1,5 +1,20 @@
 set nu
 set tabstop=2
+set encoding=utf-8
+set ic
+set background=dark
+
+if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml 
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 call plug#begin('~/_local/share/nvim/plugged')
 
@@ -17,6 +32,10 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+Plug 'scrooloose/nerdtree'
+Plug 'drewtempelmeyer/palenight.vim'
+
 
 " Configuration for vim-scala
 au BufRead,BufNewFile *.sbt set filetype=scala
@@ -77,3 +96,6 @@ inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {{     {
 inoremap {}     {}
+nmap <silent> <C-n> :NERDTreeToggle<CR>
+
+colorscheme palenight
