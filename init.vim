@@ -2,16 +2,16 @@ set nu
 set tabstop=2
 set encoding=utf-8
 set ic
-set background=dark
+
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
@@ -35,6 +35,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'scrooloose/nerdtree'
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'connorholyday/vim-snazzy'
 
 
 " Configuration for vim-scala
@@ -47,6 +48,8 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 call plug#end()
+
+let g:NERDTreeWinSize=50
 
 " This is the default extra key bindings
 let g:fzf_action = {
@@ -98,4 +101,6 @@ inoremap {{     {
 inoremap {}     {}
 nmap <silent> <C-n> :NERDTreeToggle<CR>
 
+set background=dark
+set t_Co=256
 colorscheme palenight
