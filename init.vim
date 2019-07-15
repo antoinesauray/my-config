@@ -18,10 +18,9 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 call plug#begin('~/_local/share/nvim/plugged')
 
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 Plug 'derekwyatt/vim-scala'
 
@@ -37,9 +36,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'connorholyday/vim-snazzy'
 
+Plug 'ElmCast/elm-vim'
 
-" Configuration for vim-scala
-au BufRead,BufNewFile *.sbt set filetype=scala
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 let g:airline#extensions#tabline#enabled = 1
@@ -83,11 +81,11 @@ let g:fzf_colors =
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
+" Coc.nvim
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
 
 nnoremap <c-p> :FZF<cr>
-
-" Scala metal configuration
-au BufRead,BufNewFile *.sbt set filetype=scala
 
 let g:netrw_banner = 3
 source $HOME/.config/nvim/coc.vim
@@ -104,3 +102,5 @@ nmap <silent> <C-n> :NERDTreeToggle<CR>
 set background=dark
 set t_Co=256
 colorscheme palenight
+
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
