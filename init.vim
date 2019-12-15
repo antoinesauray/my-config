@@ -2,6 +2,7 @@ set nu
 set tabstop=2
 set encoding=utf-8
 set ic
+set nu
 
 if (has("termguicolors"))
   set termguicolors
