@@ -1,23 +1,26 @@
 {
-				"languageserver": {
-								"metals": {
-												"command": "metals-vim",
-												"rootPatterns": ["build.sbt"],
-												"filetypes": ["scala", "sbt"]
-								},
-								"elmLS": {
-												"command": "elm-language-server",
-												"args": ["--stdio"],
-												"filetypes": ["elm"],
-												"rootPatterns": ["elm.json"],
-												"initializationOptions": {
-																"runtime": "node",
-																"elmPath": "elm",
-																"elmFormatPath": "elm-format",
-																"elmTestPath": "elm-test"
-												}
-								}
-				},
-
-"tsserver.trace.server": "verbose"
+  "languageserver": {
+    "metals": {
+      "command": "metals-vim",
+      "rootPatterns": ["build.sbt"],
+      "filetypes": ["scala", "sbt"]
+    },
+    "elmLS": {
+      "command": "elm-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "initializationOptions": {
+        "runtime": "node",
+        "elmPath": "elm",
+        "elmFormatPath": "elm-format",
+        "elmTestPath": "elm-test"
+      }
+    }
+  },
+  "java.import.gradle.wrapper.enabled": true,
+  "java.maven.downloadSources": true,
+  "java.import.gradle.enabled": true,
+  "java.import.maven.enabled": true,
+  "java.configuration.updateBuildConfiguration": "automatic"
 }
