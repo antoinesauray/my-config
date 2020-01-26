@@ -52,6 +52,7 @@ Plug 'tomtom/tcomment_vim'
 
 " Surrounds parentheses
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag'
 
 " Vim fugitive for git commands inside vim
 Plug 'tpope/vim-fugitive'
@@ -59,19 +60,19 @@ Plug 'tpope/vim-fugitive'
 " Git diff
 Plug 'airblade/vim-gitgutter'
 
+call plug#end()
 
 let g:lightline = { 'colorscheme': 'palenight' }
 let g:palenight_terminal_italics=1
 
+let g:ragtag_global_maps = 1
+
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-call plug#end()
-
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:NERDTreeWinSize=50
 
 " This is the default extra key bindings
