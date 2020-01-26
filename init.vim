@@ -1,8 +1,8 @@
 set nu
-set tabstop=2
 set encoding=utf-8
 set ic
 set nu
+set tabstop=2 shiftwidth=2 expandtab
 
 if (has("termguicolors"))
   set termguicolors
@@ -15,29 +15,53 @@ endif
 
 
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml 
+au! BufNewFile,BufReadPost *.{java} set filetype=java
+au! BufNewFile,BufReadPost *.{xml} set filetype=xml
+au! BufNewFile,BufReadPost *.{json} set filetype=json
+
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType json setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType xml setlocal ts=2 sts=2 sw=4 expandtab
+autocmd FileType java setlocal ts=2 sts=2 sw=2 expandtab
+" Coc.nvim
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 call plug#begin('~/_local/share/nvim/plugged')
 
+"
+" FZF for search
+"
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
+" for syntax highlighting Scala and sbt source files.
 Plug 'derekwyatt/vim-scala'
 
-Plug 'roxma/nvim-yarp'
-
-Plug 'derekwyatt/vim-scala'
+" Auto Complete
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
+" Tree
 Plug 'scrooloose/nerdtree'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'connorholyday/vim-snazzy'
 
-Plug 'ElmCast/elm-vim'
+" Vim theme
+Plug 'drewtempelmeyer/palenight.vim'
+
+Plug 'tomtom/tcomment_vim'
+
+" Surrounds parentheses
+Plug 'tpope/vim-surround'
+
+" Vim fugitive for git commands inside vim
+Plug 'tpope/vim-fugitive'
+
+" Git diff
+Plug 'airblade/vim-gitgutter'
+
+
+let g:lightline = { 'colorscheme': 'palenight' }
+let g:palenight_terminal_italics=1
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -82,26 +106,24 @@ let g:fzf_colors =
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-" Coc.nvim
-autocmd FileType json syntax match Comment +\/\/.\+$+
 
-
+" Ctrl P triggers fzf search
 nnoremap <c-p> :FZF<cr>
 
 let g:netrw_banner = 3
 source $HOME/.config/nvim/coc.vim
-set shell=/bin/sh
+set shell=/usr/local/bin/zsh
 
 map <Space> <Leader>
 
-inoremap {      {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
-inoremap {}     {}
+" inoremap {      {}<Left>
+" inoremap {<CR>  {<CR>}<Esc>O
+" inoremap {{     {
+" inoremap {}     {}
 nmap <silent> <C-n> :NERDTreeToggle<CR>
+
+noremap <M-CR> :CocAction<CR>
 
 set background=dark
 set t_Co=256
 colorscheme palenight
-
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
