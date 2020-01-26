@@ -69,6 +69,13 @@ let g:ragtag_global_maps = 1
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-json',
+  \ 'coc-java',
+  \ ]
+
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
