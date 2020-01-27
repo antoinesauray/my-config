@@ -60,6 +60,9 @@ Plug 'tpope/vim-fugitive'
 " Git diff
 Plug 'airblade/vim-gitgutter'
 
+" Vim templates
+Plug 'aperezdc/vim-template'
+
 call plug#end()
 
 let g:lightline = { 'colorscheme': 'palenight' }
@@ -124,10 +127,6 @@ set shell=/usr/local/bin/zsh
 
 map <Space> <Leader>
 
-" inoremap {      {}<Left>
-" inoremap {<CR>  {<CR>}<Esc>O
-" inoremap {{     {
-" inoremap {}     {}
 nmap <silent> <C-n> :NERDTreeToggle<CR>
 
 noremap <M-CR> :CocAction<CR>
@@ -135,3 +134,30 @@ noremap <M-CR> :CocAction<CR>
 set background=dark
 set t_Co=256
 colorscheme palenight
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+
+function! GetCurrentContent()
+  let l:content = getline(0,line("$"))
+  let l:result = 0
+  for l:temp in l:content
+    if strlen(l:temp)> 0
+      let l:result = 1
+      break
+    endif
+  endfor
+  if l:result == 0
+    let l:extension = expand("%:c")
+    exe 'Template .' . l:extension
+  endif
+endfunction
+autocmd BufEnter * call GetCurrentContent()
+
+function! GetEmailFromEnv()
+  return "test"
+endfunction
+
+" Used for Vim template
+let g:email = $EMAIL
