@@ -52,3 +52,5 @@ unset __conda_setup
 eval "$(rbenv init -)"
 
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+
+source $HOME/.profile
