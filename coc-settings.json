@@ -22,5 +22,7 @@
   "java.maven.downloadSources": true,
   "java.import.gradle.enabled": true,
   "java.import.maven.enabled": true,
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.format.settings.url": "/Users/a.sauray/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
+  "java.jdt.ls.vmargs": "-javaagent:/Users/a.sauray/Src/Lombok/lombok.jar -Xbootclasspath/a:/Users/a.sauray/Src/Lombok/lombok.jar"
 }
