@@ -14,6 +14,17 @@ plugins=(
 #ZSH_THEME="michelebologna"
 source $ZSH/oh-my-zsh.sh
 
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+# Format the vcs_info_msg_0_ variable
+zstyle ':vcs_info:git:*' formats 'on branch %b'
+ 
+# Set up the prompt (with git branch name)
+setopt PROMPT_SUBST
+PROMPT='%n in ${PWD/#$HOME/~} ${vcs_info_msg_0_} > '
+
+
 export EDITOR='vim'
 alias gpfl="git push --force-with-lease"
 alias vim=nvim
@@ -54,3 +65,4 @@ eval "$(rbenv init -)"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 
 source $HOME/.profile
+source $HOME/.blablacar.sh
