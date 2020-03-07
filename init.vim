@@ -6,6 +6,7 @@ set tabstop=2 shiftwidth=2 expandtab
 
 if (has("termguicolors"))
   set termguicolors
+  tmap <C-o> <C-\><C-n>
 endif
 
 if (has("nvim"))
@@ -22,7 +23,7 @@ au! BufNewFile,BufReadPost *.{json} set filetype=json
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType json setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType xml setlocal ts=2 sts=2 sw=4 expandtab
-autocmd FileType java setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType java setlocal ts=4 sts=4 sw=4 expandtab
 " Coc.nvim
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -41,17 +42,22 @@ Plug 'derekwyatt/vim-scala'
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+" Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
+
+" Syntax
+" Plug 'vim-syntastic/syntastic'
 
 " Tree
 Plug 'scrooloose/nerdtree'
 
 " Vim theme
-Plug 'drewtempelmeyer/palenight.vim'
+"Plug 'drewtempelmeyer/palenight.vim'
+Plug  'arzg/vim-colors-xcode'
 
 Plug 'tomtom/tcomment_vim'
 
 " Surrounds parentheses
-Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
 Plug 'tpope/vim-ragtag'
 
 " Vim fugitive for git commands inside vim
@@ -63,10 +69,20 @@ Plug 'airblade/vim-gitgutter'
 " Vim templates
 Plug 'aperezdc/vim-template'
 
+" Vim test
+Plug 'janko/vim-test'
+
+" basic useful commands such as :Remove
+Plug 'tpope/vim-eunuch'
+
+" Used for compile
+Plug 'tpope/vim-dispatch'
+
+
 call plug#end()
 
-let g:lightline = { 'colorscheme': 'palenight' }
-let g:palenight_terminal_italics=1
+" let g:lightline = { 'colorscheme': 'palenight' }
+" let g:palenight_terminal_italics=1
 
 let g:ragtag_global_maps = 1
 
@@ -74,7 +90,6 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 
 let g:coc_global_extensions = [
   \ 'coc-snippets',
-  \ 'coc-pairs',
   \ 'coc-json',
   \ 'coc-java',
   \ ]
@@ -133,10 +148,12 @@ noremap <M-CR> :CocAction<CR>
 
 set background=dark
 set t_Co=256
-colorscheme palenight
+" colorscheme palenight
+colorscheme xcodewwdc
 
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Auto start NERDTree
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 
 function! GetCurrentContent()
@@ -161,3 +178,19 @@ endfunction
 
 " Used for Vim template
 let g:email = $EMAIL
+
+" Recommended syntastic settings
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+"
+" let g:syntastic_java_checkers = ['checkstyle']
+" let g:syntastic_java_checkstyle_classpath = '/Users/a.sauray/Src/checkstyle/jars/checkstyle-8.29-all.jar'
+" let g:syntastic_java_checkstyle_conf_file = './checkstyle/checkstyle.xml'
+
+let test#java#runner = 'gradletest'
